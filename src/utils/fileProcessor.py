@@ -20,3 +20,7 @@ class FileProcessor:
 		except:
 			print('Error opening', filepath)
 			return {}
+
+if __name__ == '__main__':
+	
+	print(FileProcessor.readYamlFile('../../inputs/processing/python_keywords.yml'))
