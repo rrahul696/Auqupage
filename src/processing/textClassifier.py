@@ -1,6 +1,4 @@
 import json
-# from processText import ProcessText
-# from read_files import readFilesInDir
 import sys
 sys.path.append('../')
 from utils.textProcessor import TextProcessor
@@ -8,7 +6,7 @@ from utils.textProcessor import TextProcessor
 class TextClassifier:
 	
 	@staticmethod
-	def classifyQuestion(course_info, question):
+	def classifyQuestiononCourseInfo(course_info, question):
 		course_ngrams = TextClassifier._getCourseInfoNgrams(course_info)
 		question_ngrams = TextClassifier._getQuestionNgrams(question)
 		question['tags'] = {}
@@ -65,6 +63,10 @@ class TextClassifier:
 		return tags
 
 	@staticmethod
+	def classifyQuestionOnInput():
+		pass
+
+	@staticmethod
 	def _getCourseInfoNgrams(course_info):
 		course_ngrams = {}
 		for course in course_info:
@@ -91,4 +93,4 @@ class TextClassifier:
 if __name__ == '__main__':
 	with open('../outputs/extraction/course_info.json') as fp:
 		course_info = json.loads(fp.read())
-	print(json.dumps(TextClassifier.classifyQuestion(course_info, {'question': 'On performing syntax directed translation  on a python program using bayesian learning and string algorithms and trees control flow graph\nOutput of min(list1) will be', 'expected_answer': '0.0'})))
+	print(json.dumps(TextClassifier.classifyQuestiononCourseInfo(course_info, {'question': 'On performing syntax directed translation  on a python program using bayesian learning and string algorithms and trees control flow graph\nOutput of min(list1) will be', 'expected_answer': '0.0'})))
