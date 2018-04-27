@@ -19,7 +19,7 @@ class TextProcessor:
 		stop_words = set(stopwords.words('english'))
 		return ' '.join(\
 			map(lambda token: porterStemmer.stem(token),\
-				filter(lambda token: len(token) > 1 and token not in stop_words,\
+				filter(lambda token: token not in stop_words,\
 					map(lambda token: token.lower(), word_tokenize(text)))))
 
 	@staticmethod
