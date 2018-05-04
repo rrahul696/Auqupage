@@ -6,7 +6,8 @@ from utils.textProcessor import TextProcessor
 class TextClassifier:
 	
 	@staticmethod
-	def classifyQuestiononCourseInfo(course_info, question):
+	def classifyQuestionOnCourseInfo(course_info, question):
+		# print(question)
 		course_ngrams = TextClassifier._getCourseInfoNgrams(course_info)
 		question_ngrams = TextClassifier._getQuestionNgrams(question)
 		question['tags'] = {}
@@ -63,8 +64,20 @@ class TextClassifier:
 		return tags
 
 	@staticmethod
-	def classifyQuestionOnInput():
-		pass
+	def classifyQuestionOnInput(mappings, question):
+		question_unigrams = TextClassifier._getQuestionUnigrams(question)
+		input_tags = set()
+		for mapping_obj in mappings:
+			# print(mapping_)
+			mapping = mappings['mappings']
+			for keyword in mapping:
+				if keyword in question_unigrams:
+					input_tags.add(keyword)
+				else:
+					for unigram in question_unigrams:
+						if unigram in mapping[keyword]:
+							input_tags.add(keyword)
+		question['input_tags'] = tuple(input_tags)
 
 	@staticmethod
 	def _getCourseInfoNgrams(course_info):
@@ -85,12 +98,18 @@ class TextClassifier:
 					course_ngrams[course_code]['ngrams'][topic_title][subtopic] = TextProcessor.get2and3Ngrams(stemmed_subtopic)
 		return course_ngrams
 
+	@staticmethod
 	def _getQuestionNgrams(question):
+		# print(question)
 		stemmed_question = TextProcessor.getStemmedText(question['question'] + '\n' + question['expected_answer'])
 		return TextProcessor.get2and3Ngrams(stemmed_question)
 
+	@staticmethod
+	def _getQuestionUnigrams(question):
+		stemmed_question = TextProcessor.getStemmedText(question['question'] + '\n' + question['expected_answer'])
+		return TextProcessor.getUnigrams(stemmed_question)
 
 if __name__ == '__main__':
-	with open('../outputs/extraction/course_info.json') as fp:
+	with open('../../outputs/extraction/course_info.json') as fp:
 		course_info = json.loads(fp.read())
 	print(json.dumps(TextClassifier.classifyQuestiononCourseInfo(course_info, {'question': 'On performing syntax directed translation  on a python program using bayesian learning and string algorithms and trees control flow graph\nOutput of min(list1) will be', 'expected_answer': '0.0'})))

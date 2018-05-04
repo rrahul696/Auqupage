@@ -14,6 +14,10 @@ class TextProcessor:
 		return n_grams
 
 	@staticmethod
+	def getUnigrams(text):
+		return tuple(map(lambda x: x[0], ngrams(filter(TextProcessor.isTokenAWord, word_tokenize(text)), 1)))
+
+	@staticmethod
 	def getStemmedText(text):
 		porterStemmer = PorterStemmer()
 		stop_words = set(stopwords.words('english'))
@@ -32,5 +36,6 @@ class TextProcessor:
 
 if __name__ == '__main__':
 	text = 'the big bang theory, is one  awesome thepry! belive it, comon.'
-	print(TextProcessor.get2and3Ngrams(text))
-	print(TextProcessor.getStemmedText(text))
+	# print(TextProcessor.get2and3Ngrams(text))
+	# print(TextProcessor.getStemmedText(text))
+	print(TextProcessor.getUnigrams(text))

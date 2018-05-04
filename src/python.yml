@@ -1,0 +1,23 @@
+course_code: UE16CS101
+course_title: Introduction to Computing in Python
+mappings:
+    loops:
+        - while
+        - for
+    functions:
+        - def
+        - return
+        - yield
+    generators:
+        - yield
+    lists:
+        - "[]"
+        - list
+        - ".append("
+    dictionaries:
+        - dict
+        - "['"
+        - "{}"
+        - .keys(
+    sets:
+        - set

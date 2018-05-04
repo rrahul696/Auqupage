@@ -1,0 +1,27 @@
+[
+	{
+		"question": "1. for i in 'abcd'[::-1]:\nprint (i)",
+		"options": [],
+		"expected_answer": ""
+	},
+	{
+		"question": "2. Function call before its definition results in error",
+		"options": [],
+		"expected_answer": ""
+	},
+	{
+		"question": "def foo(x):\n\tprint(\"x=\",x)\nprint(foo(500))",
+		"options": [],
+		"expected_answer": ""
+	},
+	{
+		"question": "for i in range(10):\nif i == 5:\n\tbreak\nelse:\n\tprint(i)\nelse:\n\tprint(\"Here\")",
+		"options": [],
+		"expected_answer": ""
+	},
+	{
+		"question": "7. What will be the output?\n\ndef f(i, values = []):\n\tvalues.append(i)\n\treturn values",
+		"options": [],
+		"expected_answer": ""
+	}
+]
